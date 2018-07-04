@@ -1,32 +1,15 @@
-import React, {Component} from "react";
+import React from "react";
 
-class List extends Component {
-    constructor(props) {
-        super(props);
+//更改无状态组件的构建方式。使用箭头函数绑定this，是由结构赋值
+const List = ({list, changeState}) => (<ul>
+    {
+        list.map((value, index) => {
+            return <li style={value.completed ? {textDecoration: "line-through"} : {}}
+                       onClick={(e) => {
+                           changeState(value.index)
+                       }} key={index}>{value.text}</li>
+        })
     }
-
-/*
-    changeCompleted(index) {
-        // this.props.changeState(indedx)
-        console.log(index)
-    }
-*/
-
-    render() {
-        return (<ul>
-            {
-                this.props.list.map((value, index) => {
-                    return <li style={value.completed ? {textDecoration: "line-through"} : {}}
-                               onClick={(e) => {
-                                   // this.changeCompleted(value.index)
-                                   this.props.changeState(value.index)
-
-                               }} key={index}>{value.text}</li>
-                })
-            }
-        </ul>)
-    }
-
-}
+</ul>);
 
 export default List

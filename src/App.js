@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import Addtodo from './components/Addtodo'
 import Footer from './components/Footer'
 import List from './components/List'
@@ -13,7 +12,6 @@ class App extends Component {
         super(props);
         this.state = {
             list: [],
-
         };
         this.state.showList = this.state.list
     }
@@ -47,12 +45,9 @@ class App extends Component {
                 currentState = "FINISH";
                 break;
         }
-
     }
 
     changeState(index) {
-        console.log(index);
-
         let newList = this.state.list.map(x => {
             if (x.index && index && x.index === index) {
                 return Object.assign(x, {completed: !x.completed})
@@ -60,21 +55,18 @@ class App extends Component {
                 return x
             }
         });
-
-        console.log(newList)
         this.setState({
             list: newList
-        })
+        });
         this.filter(currentState)
     }
 
     render() {
         return (
             <div className="App">
-                {JSON.stringify(this.state.list)}
                 <Addtodo addTodo={(text) => this.addTodo(text)}/>
                 <List list={this.state.showList} changeState={(index) => this.changeState(index)}/>
-                <Footer filter={(type) => this.filter(type)}/>
+                <Footer filter={(type) => this.filter(type)} currentState={currentState}/>
             </div>
         );
     }
