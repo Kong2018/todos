@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux"
-import {addTodo} from '../actions'
 
-const AddTodo = ({dispatch}) => {
+
+const AddTodo = ({dispatch,addTodo}) => {
     let input;
     return (<div>
         <form onSubmit={e => {
@@ -10,7 +10,7 @@ const AddTodo = ({dispatch}) => {
             if (!input.value.trim()) {
                 return
             }
-            dispatch(addTodo(input.value));
+            addTodo(input.value)
             input.value = ""
         }}>
             <input type="text" ref={node => input = node}/>
@@ -19,4 +19,4 @@ const AddTodo = ({dispatch}) => {
     </div>)
 };
 
-export default connect()(AddTodo)
+export default AddTodo
